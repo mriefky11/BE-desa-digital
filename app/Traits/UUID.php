@@ -1,0 +1,31 @@
+<?php
+
+namespace App\traits;
+
+use Illuminate\Support\Str;
+
+trait UUID
+{
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function($model){
+            if ($model->getKey() === null){
+                $model->setAttribute($model->getKeyName(), Str::uuid()->toString());
+            }
+        });
+    }
+
+    public function getIncrement(){
+        return false;
+    }
+
+    public function getKeyType(){
+        return 'string';
+    }
+}
+
+
+
+
