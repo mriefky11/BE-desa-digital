@@ -4,9 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class HeadOfFamily extends Model
+class FamilyMember extends Model
 {
     protected $fillable = [
+        'head_of_family_id',
         'user_id',
         'profile_picture',
         'indetify_number',
@@ -14,14 +15,15 @@ class HeadOfFamily extends Model
         'date_of_birth',
         'phone_number',
         'occupation',
-        'marital_status'
+        'marital_status',
+        'relation',
     ];
 
     public function user(){
         return $this->belongsTo(User::class);
     }
 
-    public function familyMember(){
-        return $this->hasMany(FamilyMember::class);
+    public function headOfFamily(){
+        return $this->belongsTo(HeadOfFamily::class);
     }
 }
