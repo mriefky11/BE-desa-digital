@@ -20,7 +20,7 @@ class SocialAssistance extends Model
         'is_available',
     ];
 
-    public function SocialAssistanceRecipient(){
+    public function socialAssistanceRecipient(){
         return $this->hasMany(SocialAssistanceRecipient::class);
     }
 }

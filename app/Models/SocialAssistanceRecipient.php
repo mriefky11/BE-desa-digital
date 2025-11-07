@@ -25,7 +25,7 @@ class SocialAssistanceRecipient extends Model
         return $this->belongsTo(HeadOfFamily::class);
     }
 
-    public function SocialAssistance(){
+    public function socialAssistance(){
         return $this->belongsTo(SocialAssistance::class);
     }
 }
