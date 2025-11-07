@@ -2,10 +2,14 @@
 
 namespace App\Models;
 
+use App\traits\UUID;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class SocialAssistance extends Model
 {
+    use SoftDeletes, UUID;
+
     protected $fillable = [
         'thumbnail',
         'name',
@@ -15,4 +19,8 @@ class SocialAssistance extends Model
         'description',
         'is_available',
     ];
+
+    public function SocialAssistanceRecipient(){
+        return $this->hasMany(SocialAssistanceRecipient::class);
+    }
 }

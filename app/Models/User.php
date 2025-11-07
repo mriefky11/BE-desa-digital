@@ -6,13 +6,14 @@ namespace App\Models;
 
 use App\traits\UUID;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable, UUID;
+    use HasFactory, Notifiable, SoftDeletes, UUID;
 
     /**
      * The attributes that are mass assignable.

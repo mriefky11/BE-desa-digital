@@ -2,10 +2,15 @@
 
 namespace App\Models;
 
+use App\traits\UUID;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class HeadOfFamily extends Model
 {
+
+    use SoftDeletes, UUID;
+
     protected $fillable = [
         'user_id',
         'profile_picture',
@@ -23,5 +28,9 @@ class HeadOfFamily extends Model
 
     public function familyMember(){
         return $this->hasMany(FamilyMember::class);
+    }
+
+    public function SocialAssistanceRecipient(){
+        return $this->hasMany(SocialAssistanceRecipient::class);
     }
 }

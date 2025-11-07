@@ -6,29 +6,26 @@ use App\traits\UUID;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class FamilyMember extends Model
+class SocialAssistanceRecipient extends Model
 {
-
     use SoftDeletes, UUID;
 
     protected $fillable = [
+        'social_assistance_id',
         'head_of_family_id',
-        'user_id',
-        'profile_picture',
-        'indetify_number',
-        'gender',
-        'date_of_birth',
-        'phone_number',
-        'occupation',
-        'marital_status',
-        'relation',
+        'amount',
+        'reason',
+        'bank',
+        'account_number',
+        'proof',
+        'status',
     ];
-
-    public function user(){
-        return $this->belongsTo(User::class);
-    }
 
     public function headOfFamily(){
         return $this->belongsTo(HeadOfFamily::class);
+    }
+
+    public function SocialAssistance(){
+        return $this->belongsTo(SocialAssistance::class);
     }
 }
