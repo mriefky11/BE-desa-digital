@@ -56,4 +56,8 @@ class User extends Authenticatable
     public function familyMember(){
         return $this->hasOne(FamilyMember::class);
     }
+
+    public function developmentApplicant(){
+        return $this->hasMany(DevelopmentApplicant::class);
+    }
 }

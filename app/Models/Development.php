@@ -20,4 +20,8 @@ class Development extends Model
         'amount',
         'status'
     ];
+
+    public function developmentApplicantpment(){
+        return $this->hasMany(DevelopmentApplicant::class);
+    }
 }
