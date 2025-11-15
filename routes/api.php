@@ -7,5 +7,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
-Route::apiResource('user',UserController::class);
+
+Route::apiResource('user', UserController::class);
 Route::get('user/all/paginated', [UserController::class, 'getAllPaginated']);

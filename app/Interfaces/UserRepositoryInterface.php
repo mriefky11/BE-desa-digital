@@ -2,7 +2,8 @@
 
 namespace App\Interfaces;
 
-interface UserRepositoryInterface{
+interface UserRepositoryInterface
+{
     public function getAll(
         ?string $search,
         ?int $limit,
@@ -12,5 +13,22 @@ interface UserRepositoryInterface{
     public function getAllPaginated(
         ?string $search,
         ?int $rowPerPage
+    );
+
+    public function create(
+        ?array $data
+    );
+
+    public function getById(
+        ?string $id
+    );
+
+    public function update(
+        ?array $data,
+        ?string $id
+    );
+
+    public function delete(
+        ?string $id
     );
 }
