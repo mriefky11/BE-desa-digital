@@ -13,18 +13,18 @@ return new class extends Migration
     {
         Schema::create('head_of_families', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            
+
             $table->uuid('user_id');
             $table->foreign('user_id')->references('id')->on('users');
 
             $table->string('profile_picture');
-            $table->integer('indetify_number');
-            $table->enum('gender',['male','female']);
+            $table->bigInteger('indetify_number');
+            $table->enum('gender', ['male', 'female']);
             $table->date('date_of_birth');
             $table->string('phone_number');
             $table->string('occupation');
-            $table->enum('marital_status',['single','maried']);
-            
+            $table->enum('marital_status', ['single', 'maried']);
+
             $table->softDeletes();
             $table->timestamps();
         });

@@ -49,12 +49,14 @@ class UserRepository implements UserRepositoryInterface
     ) {
         DB::beginTransaction();
         try {
-            $user = new User();
+            $user = new User;
             $user->name = $data['name'];
             $user->email = $data['email'];
             $user->password = bcrypt($data['password']);
             $user->save();
+
             DB::commit();
+
             return $user;
         } catch (\Exception $e) {
             DB::rollBack();
@@ -68,7 +70,7 @@ class UserRepository implements UserRepositoryInterface
         return $query->first();
     }
 
-    public function update(?array $data, ?string $id)
+    public function update(?string $id, ?array $data)
     {
         DB::beginTransaction();
 

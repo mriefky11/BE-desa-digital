@@ -22,19 +22,38 @@ class HeadOfFamily extends Model
         'marital_status'
     ];
 
-    public function user(){
+    public function scopeSearch($query, $search)
+    {
+        return $query->whereHaswhere(
+            'user',
+            function ($query) use ($search) {
+                $query->where('name', 'like', '%' . $search . '%')
+                    ->orWhere('email', 'like', '%' . $search . '%')
+                    ->orWhere('gender', 'like', '%' . $search . '%')
+                    ->orWhere('phone_number', 'like', '%' . $search . '%')
+                    ->orWhere('occupation', 'like', '%' . $search . '%')
+                    ->orWhere('marital_status', 'like', '%' . $search . '%');
+            }
+        );
+    }
+
+    public function user()
+    {
         return $this->belongsTo(User::class);
     }
 
-    public function familyMember(){
+    public function familyMember()
+    {
         return $this->hasMany(FamilyMember::class);
     }
 
-    public function socialAssistanceRecipient(){
+    public function socialAssistanceRecipient()
+    {
         return $this->hasMany(SocialAssistanceRecipient::class);
     }
 
-    public function eventParticipant(){
+    public function eventParticipant()
+    {
         return $this->hasMany(EventParticipant::class);
     }
 }

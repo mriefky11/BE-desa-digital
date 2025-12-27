@@ -2,7 +2,7 @@
 
 namespace App\Interfaces;
 
-interface UserRepositoryInterface
+interface HeadOfFamilyRepositoryInterface
 {
     public function getAll(
         ?string $search,
@@ -24,8 +24,8 @@ interface UserRepositoryInterface
     );
 
     public function update(
-        ?string $id,
-        ?array $data
+        ?array $data,
+        ?string $id
     );
 
     public function delete(

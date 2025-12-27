@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\ResponseHelper;
-use App\Http\Requests\UserStoreRequest;
-use App\Http\Requests\UserUpdateRequest;
+use App\Http\Requests\User\UserStoreRequest;
+use App\Http\Requests\User\UserUpdateRequest;
 use App\Http\Resources\PaginateResource;
 use App\Http\Resources\UserResource;
 use App\Interfaces\UserRepositoryInterface;
@@ -104,7 +104,7 @@ class UserController extends Controller
                 return ResponseHelper::jsonResponse(false, 'Data User Tidak Ditemukan', null, 404);
             };
 
-            $user = $this->userRepository->update($request, $id);
+            $user = $this->userRepository->update($id, $request);
 
             return ResponseHelper::jsonResponse(true, 'Data User Berhasil Diperbaharui', new UserResource($user), 200);
         } catch (\Exception $e) {
