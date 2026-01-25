@@ -2,19 +2,19 @@
 
 namespace App\Repositories;
 
-use App\Interfaces\HeadOfFamilyRepositoryInterface;
-use App\Models\HeadOfFamily;
+use App\Interfaces\FamilyMemberRepositoryInterface;
+use App\Models\FamilyMember;
 use Exception;
 use Illuminate\Support\Facades\DB;
 
-class HeadOfFamilyRepository implements HeadOfFamilyRepositoryInterface
+class FamilyMemberRepository implements FamilyMemberRepositoryInterface
 {
     public function getAll(
         ?string $search,
         ?int $limit,
         bool $execute
     ) {
-        $query = HeadOfFamily::where(function ($query) use ($search) {
+        $query = FamilyMember::where(function ($query) use ($search) {
             // jika ada parameter search maka dia akan dijalankan, yang kita definisikan di model user
             if ($search) {
                 $query->search($search);
@@ -47,7 +47,7 @@ class HeadOfFamilyRepository implements HeadOfFamilyRepositoryInterface
 
     public function getById(?string $id)
     {
-        $query = HeadOfFamily::where('id', $id);
+        $query = FamilyMember::where('id', $id);
         return $query->first();
     }
 
@@ -64,21 +64,24 @@ class HeadOfFamilyRepository implements HeadOfFamilyRepositoryInterface
                 'password' => $data['password']
             ]);
 
-            $headOfFamily = new HeadOfFamily;
+            $familyMember = new FamilyMember;
 
-            $headOfFamily->user_id = $user->id;
-            $headOfFamily->profile_picture = $data['profile_picture']->store('assets/head-of-family', 'public');
-            $headOfFamily->indetify_number = $data['indetify_number'];
-            $headOfFamily->gender = $data['gender'];
-            $headOfFamily->date_of_birth = $data['date_of_birth'];
-            $headOfFamily->phone_number = $data['phone_number'];
-            $headOfFamily->occupation = $data['occupation'];
-            $headOfFamily->marital_status = $data['marital_status'];
-            $headOfFamily->save();
+            $familyMember->user_id = $user->id;
+            $familyMember->head_of_family_id = $data['head_of_family_id'];
+            $familyMember->profile_picture = $data['profile_picture']->store('assets/family-member', 'public');
+            $familyMember->indetify_number = $data['indetify_number'];
+            $familyMember->gender = $data['gender'];
+            $familyMember->date_of_birth = $data['date_of_birth'];
+            $familyMember->phone_number = $data['phone_number'];
+            $familyMember->occupation = $data['occupation'];
+            $familyMember->marital_status = $data['marital_status'];
+            $familyMember->relation = $data['relation'];
+
+            $familyMember->save();
 
             DB::commit();
 
-            return $headOfFamily;
+            return $familyMember;
         } catch (\Exception $e) {
             DB::rollBack();
             throw new Exception($e->getMessage());
@@ -90,32 +93,33 @@ class HeadOfFamilyRepository implements HeadOfFamilyRepositoryInterface
         DB::beginTransaction();
 
         try {
-            $headOfFamily = HeadOfFamily::find($id);
+            $familyMember = FamilyMember::find($id);
 
             if (isset($data['profile_picture'])) {
-                $headOfFamily->profile_picture = $data['profile_picture']->store('assets/head-of-family', 'public');
+                $familyMember->profile_picture = $data['profile_picture']->store('assets/family-member', 'public');
             }
 
-            $headOfFamily->indetify_number = $data['indetify_number'];
-            $headOfFamily->gender = $data['gender'];
-            $headOfFamily->date_of_birth = $data['date_of_birth'];
-            $headOfFamily->phone_number = $data['phone_number'];
-            $headOfFamily->occupation = $data['occupation'];
-            $headOfFamily->marital_status = $data['marital_status'];
+            $familyMember->indetify_number = $data['indetify_number'];
+            $familyMember->gender = $data['gender'];
+            $familyMember->date_of_birth = $data['date_of_birth'];
+            $familyMember->phone_member = $data['phone_number'];
+            $familyMember->occupation = $data['occupation'];
+            $familyMember->marital_status = $data['marital_status'];
+            $familyMember->relation = $data['relation'];
 
-            $headOfFamily->save();
+            $familyMember->save();
 
             $userRepository = new UserRepository;
 
-            $userRepository->update($headOfFamily->user_id, [
+            $userRepository->update($familyMember->user_id, [
                 'name' => $data['name'],
                 'email' => $data['email'],
-                'password' => isset($data['password']) ? bcrypt($data['password']) : $headOfFamily->user->password
+                'password' => isset($data['password']) ? bcrypt($data['password']) : $familyMember->user->password
             ]);
 
             DB::commit();
 
-            return $headOfFamily;
+            return $familyMember;
         } catch (\Exception $e) {
             DB::rollBack();
             throw new Exception($e->getMessage());
@@ -124,15 +128,15 @@ class HeadOfFamilyRepository implements HeadOfFamilyRepositoryInterface
 
     public function delete(?string $id)
     {
-        DB::beginTransaction();
+        DB::transaction();
 
         try {
-            $headOfFamily = HeadOfFamily::find($id);
-            $headOfFamily->delete();
+            $familyMember = FamilyMember::find($id);
+            $familyMember->delete();
 
             DB::commit();
 
-            return $headOfFamily;
+            return $familyMember;
         } catch (\Exception $e) {
             DB::rollBack();
             throw new Exception($e->getMessage());
