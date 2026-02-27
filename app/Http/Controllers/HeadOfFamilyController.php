@@ -127,7 +127,7 @@ class HeadOfFamilyController extends Controller
 
             return ResponseHelper::jsonResponse(true, 'Data Kepala Keluarga Berhasil Dihapus', null, 200);
         } catch (\Exception $e) {
-            return ResponseHelper::jsonResponse(false, $e->getMessage(), null, 500);
+            return ResponseHelper::jsonResponse(false, $e->getMessage(), new HeadOfFamilyResource($headOfFamily), 500);
         }
     }
 }

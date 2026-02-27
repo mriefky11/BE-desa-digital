@@ -118,7 +118,7 @@ class SocialAssistanceRecipientController extends Controller
             }
             $socialAssistanceRecipient = $this->socialAssistanceRecipientRepository->delete($id);
 
-            return ResponseHelper::jsonResponse(true, 'Data Penerima Bantuan Sosial Berhasil Dihapus', null, 200);
+            return ResponseHelper::jsonResponse(true, 'Data Penerima Bantuan Sosial Berhasil Dihapus', new SocialAssistanceRecipientResource($socialAssistanceRecipient), 200);
         } catch (\Exception $e) {
             return ResponseHelper::jsonResponse(false, $e->getMessage(), null, 500);
         }

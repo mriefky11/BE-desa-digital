@@ -118,7 +118,7 @@ class FamilyMemberController extends Controller
 
             $this->familyMemberRepository->delete($id);
 
-            return ResponseHelper::jsonResponse(true, 'Anggota Keluarga Berhasil Dihapus', null, 200);
+            return ResponseHelper::jsonResponse(true, 'Anggota Keluarga Berhasil Dihapus', new FamilyMemberResource($familyMember), 200);
         } catch (\Exception $e) {
             return ResponseHelper::jsonResponse(false, $e->getMessage(), null, 500);
         }
