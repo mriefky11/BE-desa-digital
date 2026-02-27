@@ -127,7 +127,7 @@ class EventController extends Controller
 
             $event = $this->eventRepository->delete($id);
 
-            return ResponseHelper::jsonResponse(true, 'Data Acara Berhasil Dihapus', null, 200);
+            return ResponseHelper::jsonResponse(true, 'Data Acara Berhasil Dihapus', new EventResource($event), 200);
         } catch (\Exception $e) {
             return ResponseHelper::jsonResponse(false, $e->getMessage(), null, 500);
         }
