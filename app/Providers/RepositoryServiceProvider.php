@@ -9,12 +9,14 @@ use App\Interfaces\SocialAssistanceRepositoryInterface;
 use App\Interfaces\UserRepositoryInterface;
 use App\Interfaces\SocialAssistanceRecipientRepositoryInterface;
 use App\Interfaces\EventRepositoryInterface;
+use App\Interfaces\DevelopmentRepositoryInterface;
 use App\Repositories\EventRepository;
 use App\Repositories\FamilyMemberRepository;
 use App\Repositories\HeadOfFamilyRepository;
 use App\Repositories\UserRepository;
 use App\Repositories\SocialAssistanceRepository;
 use App\Repositories\EventParticipantRepository;
+use App\Repositories\DevelopmentRepository;
 use Illuminate\Support\ServiceProvider;
 
 class RepositoryServiceProvider extends ServiceProvider
@@ -31,8 +33,8 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(SocialAssistanceRepositoryInterface::class, SocialAssistanceRepository::class);
         $this->app->bind(EventRepositoryInterface::class, EventRepository::class);
         $this->app->bind(EventParticipantRepositoryInterface::class, EventParticipantRepository::class);
+        $this->app->bind(DevelopmentRepositoryInterface::class, DevelopmentRepository::class);
     }
-
     /**
      * Bootstrap services.
      */
