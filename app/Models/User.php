@@ -9,11 +9,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable, SoftDeletes, UUID;
+    use HasFactory, Notifiable, SoftDeletes, UUID, HasRoles;
 
     /**
      * The attributes that are mass assignable.
@@ -49,20 +50,24 @@ class User extends Authenticatable
         ];
     }
 
-    public function scopeSearch($query, $search){
-        return $query->where('name','like','%'.$search. '%')
-                     ->orWhere('email','like','%'.$search. '%');
+    public function scopeSearch($query, $search)
+    {
+        return $query->where('name', 'like', '%' . $search . '%')
+            ->orWhere('email', 'like', '%' . $search . '%');
     }
 
-    public function headOfFamily(){
+    public function headOfFamily()
+    {
         return $this->hasOne(HeadOfFamily::class);
     }
 
-    public function familyMember(){
+    public function familyMember()
+    {
         return $this->hasOne(FamilyMember::class);
     }
 
-    public function developmentApplicant(){
+    public function developmentApplicant()
+    {
         return $this->hasMany(DevelopmentApplicant::class);
     }
 }
