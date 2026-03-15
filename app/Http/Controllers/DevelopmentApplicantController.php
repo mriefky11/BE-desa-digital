@@ -10,14 +10,27 @@ use App\Http\Resources\PaginateResource;
 use App\Models\DevelopmentApplicant;
 use App\Repositories\DevelopmentApplicantRepository;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
+use Spatie\Permission\Middleware\PermissionMiddleware;
 
-class DevelopmentApplicantController extends Controller
+class DevelopmentApplicantController extends Controller implements HasMiddleware
 {
     private DevelopmentApplicantRepository $developmentApplicantRepository;
 
     public function __construct(DevelopmentApplicantRepository $developmentApplicantRepository)
     {
         $this->developmentApplicantRepository = $developmentApplicantRepository;
+    }
+
+    public static function middleware()
+    {
+        return [
+            new Middleware(PermissionMiddleware::using(['development-applicant-list|development-applicant-create|development-applicant-update|development-applicant-delete']), only: ['index', 'store', 'update', 'destroy']),
+            new Middleware(PermissionMiddleware::using(['development-applicant-create']), only: ['store']),
+            new Middleware(PermissionMiddleware::using(['development-applicant-update']), only: ['update']),
+            new Middleware(PermissionMiddleware::using(['development-applicant-delete']), only: ['destroy']),
+        ];
     }
     /**
      * Display a listing of the resource.

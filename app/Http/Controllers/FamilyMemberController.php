@@ -8,10 +8,23 @@ use App\Http\Requests\FamilyMember\FamilyMemberUpdateRequest;
 use App\Http\Resources\FamilyMemberResource;
 use App\Interfaces\FamilyMemberRepositoryInterface;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
+use Spatie\Permission\Middleware\PermissionMiddleware;
 
-class FamilyMemberController extends Controller
+class FamilyMemberController extends Controller implements HasMiddleware
 {
     private FamilyMemberRepositoryInterface $familyMemberRepository;
+
+    public static function middleware()
+    {
+        return [
+            new Middleware(PermissionMiddleware::using(['family-member-list|family-member-create|family-member-update|family-member-delete']), only: ['index', 'store', 'update', 'destroy']),
+            new Middleware(PermissionMiddleware::using(['family-member-create']), only: ['store']),
+            new Middleware(PermissionMiddleware::using(['family-member-update']), only: ['update']),
+            new Middleware(PermissionMiddleware::using(['family-member-delete']), only: ['destroy']),
+        ];
+    }
 
     /**
      * Display a listing of the resource.

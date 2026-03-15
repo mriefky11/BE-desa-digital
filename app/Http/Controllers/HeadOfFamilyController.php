@@ -9,8 +9,11 @@ use App\Http\Resources\HeadOfFamilyResource;
 use App\Http\Resources\PaginateResource;
 use App\Interfaces\HeadOfFamilyRepositoryInterface;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
+use Spatie\Permission\Middleware\PermissionMiddleware;
 
-class HeadOfFamilyController extends Controller
+class HeadOfFamilyController extends Controller implements HasMiddleware
 {
     /**
      * Display a listing of the resource.
@@ -20,6 +23,16 @@ class HeadOfFamilyController extends Controller
     public function __construct(HeadOfFamilyRepositoryInterface $headOfFamilyRepository)
     {
         $this->headOfFamilyRepository = $headOfFamilyRepository;
+    }
+
+    public static function middleware()
+    {
+        return [
+            new Middleware(PermissionMiddleware::using(['head-of-family-list|head-of-family-create|head-of-family-update|head-of-family-delete']), only: ['index', 'store', 'update', 'destroy']),
+            new Middleware(PermissionMiddleware::using(['head-of-family-create']), only: ['store']),
+            new Middleware(PermissionMiddleware::using(['head-of-family-update']), only: ['update']),
+            new Middleware(PermissionMiddleware::using(['head-of-family-delete']), only: ['destroy']),
+        ];
     }
 
     public function index(Request $request)
