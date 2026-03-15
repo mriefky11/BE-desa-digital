@@ -82,8 +82,8 @@ class PermissionSeeder extends Seeder
         foreach ($this->permissions as $key => $value) {
             foreach ($value as $permission) {
                 Permission::firstOrCreate([
-                    'name' => $key . '_' . $permission,
-                    'guard_name' => 'sanctum'
+                    'name' => $key . '-' . $permission,
+                    'guard_name' => 'web'
                 ]);
             }
         }

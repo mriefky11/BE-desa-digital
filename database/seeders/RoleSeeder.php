@@ -16,14 +16,14 @@ class RoleSeeder extends Seeder
     {
         Role::firstOrCreate([
             'name' => 'admin',
-            'guard_name' => 'sanctum'
+            'guard_name' => 'web',
         ])->givePermissionTo(Permission::all());
 
         Role::firstOrCreate([
             'name' => 'head-of-family',
-            'guard_name' => 'sanctum'
+            'guard_name' => 'web',
         ])->givePermissionTo([
-            'dashoard-menu',
+            'dashboard-menu',
 
             'family-member-menu',
             'family-member-list',

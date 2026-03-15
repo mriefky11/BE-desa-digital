@@ -14,10 +14,14 @@ return new class extends Migration
         Schema::create('profile_images', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->uuid('profile_id');
-            $table->foreignId('profile_id')->references('id')->on('profiles');
             $table->string('image');
             $table->softDeletes();
             $table->timestamps();
+
+            $table->foreign('profile_id')
+                ->references('id')
+                ->on('profiles')
+                ->cascadeOnDelete();
         });
     }
 

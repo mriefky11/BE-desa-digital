@@ -15,7 +15,10 @@ return new class extends Migration
             $table->uuid('id')->primary();
 
             $table->uuid('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users')
+                ->cascadeOnDelete();
 
             $table->string('profile_picture');
             $table->bigInteger('indetify_number');
