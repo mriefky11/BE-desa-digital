@@ -24,7 +24,7 @@ class DevelopmentFactory extends Factory
             'start_date' => $this->faker->date(),
             'end_date' => $this->faker->date(),
             'amount' => $this->faker->randomNumber(2),
-            'status' => $this->faker->randomElement(['pending', 'approved', 'rejected']),
+            'status' => $this->faker->randomElement(['ongoing', 'completed']),
         ];
     }
 }

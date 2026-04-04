@@ -15,7 +15,7 @@ class FamilyMember extends Model
         'head_of_family_id',
         'user_id',
         'profile_picture',
-        'indetify_number',
+        'identity_number',
         'gender',
         'date_of_birth',
         'phone_number',

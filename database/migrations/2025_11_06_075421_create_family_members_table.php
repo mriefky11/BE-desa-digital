@@ -21,12 +21,12 @@ return new class extends Migration
             $table->foreign('user_id')->references('id')->on('users');
 
             $table->string('profile_picture');
-            $table->integer('indetify_number');
-            $table->enum('gender',['male','female']);
+            $table->unsignedBigInteger('identity_number');
+            $table->enum('gender', ['male', 'female']);
             $table->date('date_of_birth');
             $table->string('phone_number');
             $table->string('occupation');
-            $table->enum('marital_status',['single','maried']);
+            $table->enum('marital_status', ['single', 'married']);
             $table->enum('relation',['wife','child','husband']);
 
             $table->softDeletes();

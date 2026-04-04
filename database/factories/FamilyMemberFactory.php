@@ -20,12 +20,12 @@ class FamilyMemberFactory extends Factory
         return [
             'id' => Str::uuid(),
             'profile_picture' => $this->faker->imageUrl(),
-            'indetify_number' => $this->faker->unique()->numberBetween(100000000, 999999999),
+            'identity_number' => $this->faker->unique()->numberBetween(1000000000000000, 9999999999999999),
             'gender' => $this->faker->randomElement(['male', 'female']),
             'date_of_birth' => $this->faker->dateTimeBetween('-40 years', 'now'),
             'phone_number' => $this->faker->phoneNumber(),
             'occupation' => $this->faker->jobTitle(),
-            'marital_status' => $this->faker->randomElement(['maried', 'single']),
+            'marital_status' => $this->faker->randomElement(['married', 'single']),
             'relation' => $this->faker->randomElement(['wife', 'child', 'husband'])
         ];
     }

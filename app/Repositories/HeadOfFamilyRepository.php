@@ -68,7 +68,7 @@ class HeadOfFamilyRepository implements HeadOfFamilyRepositoryInterface
 
             $headOfFamily->user_id = $user->id;
             $headOfFamily->profile_picture = $data['profile_picture']->store('assets/head-of-family', 'public');
-            $headOfFamily->indetify_number = $data['indetify_number'];
+            $headOfFamily->identity_number = $data['identity_number'];
             $headOfFamily->gender = $data['gender'];
             $headOfFamily->date_of_birth = $data['date_of_birth'];
             $headOfFamily->phone_number = $data['phone_number'];
@@ -96,7 +96,7 @@ class HeadOfFamilyRepository implements HeadOfFamilyRepositoryInterface
                 $headOfFamily->profile_picture = $data['profile_picture']->store('assets/head-of-family', 'public');
             }
 
-            $headOfFamily->indetify_number = $data['indetify_number'];
+            $headOfFamily->identity_number = $data['identity_number'];
             $headOfFamily->gender = $data['gender'];
             $headOfFamily->date_of_birth = $data['date_of_birth'];
             $headOfFamily->phone_number = $data['phone_number'];

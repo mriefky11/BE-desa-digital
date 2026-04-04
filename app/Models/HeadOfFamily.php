@@ -14,7 +14,7 @@ class HeadOfFamily extends Model
     protected $fillable = [
         'user_id',
         'profile_picture',
-        'indetify_number',
+        'identity_number',
         'gender',
         'date_of_birth',
         'phone_number',

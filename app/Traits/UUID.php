@@ -6,23 +6,19 @@ use Illuminate\Support\Str;
 
 trait UUID
 {
-    protected static function boot()
+    public function initializeUUID(): void
     {
-        parent::boot();
+        $this->incrementing = false;
+        $this->keyType = 'string';
+    }
 
-        static::creating(function($model){
-            if ($model->getKey() === null){
+    public static function bootUUID(): void
+    {
+        static::creating(function ($model) {
+            if ($model->getKey() === null) {
                 $model->setAttribute($model->getKeyName(), Str::uuid()->toString());
             }
         });
-    }
-
-    public function getIncrement(){
-        return false;
-    }
-
-    public function getKeyType(){
-        return 'string';
     }
 }
 

@@ -19,7 +19,7 @@ class SocialAssistanceFactory extends Factory
         return [
             'thumbnail' => $this->faker->imageUrl(),
             'name' => $this->faker->name(),
-            'category' => $this->faker->randomElement(['food', 'education', 'health']),
+            'category' => $this->faker->randomElement(['staple', 'cash', 'subsidized fuel', 'health']),
             'amount' => $this->faker->numberBetween(100000, 1000000),
             'provider' => $this->faker->company(),
             'description' => $this->faker->paragraph(),

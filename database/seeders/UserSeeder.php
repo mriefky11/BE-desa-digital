@@ -15,19 +15,25 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        User::create([
-            'id' => Str::uuid(),
-            'name' => 'admin',
-            'email' => 'admin@yopmail.com',
-            'password' => bcrypt('password'),
-        ])->assignRole('admin');
+        $admin = User::firstOrCreate(
+            ['email' => 'admin@yopmail.com'],
+            [
+                'id' => (string) Str::uuid(),
+                'name' => 'admin',
+                'password' => bcrypt('password'),
+            ]
+        );
+        $admin->assignRole('admin');
 
-        User::create([
-            'id' => Str::uuid(),
-            'name' => 'Kepala Keluarga',
-            'email' => 'user_kk1@yopmail.com',
-            'password' => bcrypt('password'),
-        ])->assignRole('head-of-family');
+        $kk = User::firstOrCreate(
+            ['email' => 'user_kk1@yopmail.com'],
+            [
+                'id' => (string) Str::uuid(),
+                'name' => 'Kepala Keluarga',
+                'password' => bcrypt('password'),
+            ]
+        );
+        $kk->assignRole('head-of-family');
 
         UserFactory::new()->count(15)->create();
     }

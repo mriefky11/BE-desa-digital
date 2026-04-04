@@ -69,7 +69,7 @@ class FamilyMemberRepository implements FamilyMemberRepositoryInterface
             $familyMember->user_id = $user->id;
             $familyMember->head_of_family_id = $data['head_of_family_id'];
             $familyMember->profile_picture = $data['profile_picture']->store('assets/family-member', 'public');
-            $familyMember->indetify_number = $data['indetify_number'];
+            $familyMember->identity_number = $data['identity_number'];
             $familyMember->gender = $data['gender'];
             $familyMember->date_of_birth = $data['date_of_birth'];
             $familyMember->phone_number = $data['phone_number'];
@@ -99,7 +99,7 @@ class FamilyMemberRepository implements FamilyMemberRepositoryInterface
                 $familyMember->profile_picture = $data['profile_picture']->store('assets/family-member', 'public');
             }
 
-            $familyMember->indetify_number = $data['indetify_number'];
+            $familyMember->identity_number = $data['identity_number'];
             $familyMember->gender = $data['gender'];
             $familyMember->date_of_birth = $data['date_of_birth'];
             $familyMember->phone_member = $data['phone_number'];

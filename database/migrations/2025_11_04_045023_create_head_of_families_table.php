@@ -21,12 +21,12 @@ return new class extends Migration
                 ->cascadeOnDelete();
 
             $table->string('profile_picture');
-            $table->bigInteger('indetify_number');
+            $table->unsignedBigInteger('identity_number');
             $table->enum('gender', ['male', 'female']);
             $table->date('date_of_birth');
             $table->string('phone_number');
             $table->string('occupation');
-            $table->enum('marital_status', ['single', 'maried']);
+            $table->enum('marital_status', ['single', 'married']);
 
             $table->softDeletes();
             $table->timestamps();

@@ -3,7 +3,6 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use League\CommonMark\Reference\Reference;
 
 return new class extends Migration
 {
@@ -23,7 +22,7 @@ return new class extends Migration
 
             $table->decimal('amount', 10, 2);
             $table->longText('reason');
-            $table->enum('bank',['bni','bri','bca','mandiri']);
+            $table->enum('bank', ['bri', 'bni', 'bca', 'mandiri']);
             $table->integer('account_number');
             $table->string('proof');
             $table->enum('status',['pending','approved','rejected'])->default('pending');
